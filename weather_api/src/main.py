@@ -3,7 +3,7 @@ from typing import Dict, List
 from fastapi import FastAPI
 
 from .app.get_weather_api import weather_api_connect
-from .config import api_url
+from .config import api_url, g_sheet_url
 
 app = FastAPI()   
 
@@ -35,8 +35,8 @@ def get_weather_data(state_1:str='',state_2:str='',
     normalized_values = [state for state in state_values if state]
 
     ## fetch data from API    
-    weather_for_states = weather_api_connect(weather_url, normalized_values)
-
+    weather_for_states = weather_api_connect(weather_url, normalized_values, g_sheet_url)
+    
   return {
     'data': weather_for_states
   }
